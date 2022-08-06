@@ -12,4 +12,51 @@
 
 （如果用SQL需要标注主键，外键等信息）
 
+---
+
+### 后端sqlite表结构
+
+* users表
+
+  ```sqlite
+  TABLE users
+  
+  ​      (
+  
+  ​        id INTEGER PRIMARY KEY AUTOINCREMENT,
+  
+  ​        username TEXT NOT NULL,
+  
+  ​        pwhash TEXT NOT NULL
+  
+  ​      )
+  ```
+
+* containers表
+
+  ```sqlite
+  TABLE containers
+  
+  ​      (
+  
+  ​        id INTEGER PRIMARY KEY AUTOINCREMENT,
+  
+  ​        containerid TEXT NOT NULL,
+  
+  ​        projectname TEXT,
+  
+  ​        time DATETIME NOT NULL,
+  
+  ​        language TEXT NOT NULL,
+  
+  ​        version INTEGER NOT NULL,
+  
+  ​        userid INTEGE,
+  
+  ​        FOREIGN KEY(userid) REFERENCES users(id) on delete cascade
+  
+  ​      )
+  ```
+
+  
 
