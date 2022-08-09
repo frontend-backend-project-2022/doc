@@ -49,7 +49,7 @@
   
   ​        language TEXT NOT NULL,
   
-  ​        version INTEGER NOT NULL,
+  ​        version TEXT NOT NULL,
   
   ​        userid INTEGE,
   

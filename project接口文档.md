@@ -1,6 +1,4 @@
-注：以下API写好后均未经过测试(8/7)
-
-
+## Project-related API
 
 获取工程的文件结构
 
@@ -85,7 +83,7 @@
 
 * `DELETE /database/deleteProject/<containerid> `
 * para: containerid (str)
-* return: 200
+* return: "sucess", 200
 
 
 
@@ -96,9 +94,13 @@
 
 ```json
 {
-    "containerid" = "123456",
-    "newname" = "NewName",
+    "containerid" : "123456",
+    "newname" : "NewName",
 }
 ```
 
-* return: 200
+* return: "sucess", 200
+
+  
+
+注：以上API写好后已经过pytest测试(08/09)
