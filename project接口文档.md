@@ -1,5 +1,23 @@
 ## Project-related API
 
+上传文件
+
+* `GET /docker/uploadFile/`
+
+* multipart/form-data
+
+  ```json
+  {
+      "file" :  //要上传的文件,
+      "dir" : "./", //workspace内的相对路径
+      "containerid" : "123456",
+  }
+  ```
+
+* return: "success"
+
+
+
 获取工程的文件结构
 
 * `GET /docker/getdir/<container_id>`
@@ -83,7 +101,7 @@
 
 * `DELETE /database/deleteProject/<containerid> `
 * para: containerid (str)
-* return: "sucess", 200
+* return: "success"
 
 
 
@@ -99,8 +117,6 @@
 }
 ```
 
-* return: "sucess", 200
+* return: "success"
 
   
-
-注：以上API写好后已经过pytest测试(08/09)
