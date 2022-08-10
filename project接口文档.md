@@ -14,7 +14,34 @@
   }
   ```
 
+* 注：文件名中不能含有'/'等特殊字符
+
 * return: "success"
+
+  
+
+上传文件夹（未测试）
+
+* `GET /docker/uploadFolder/`
+* 与上传文件类似
+
+
+
+下载文件内容
+
+* `GET /docker/downloadContent/`
+
+* request: json
+
+  ```json
+  {
+      "filename" :  "NAME",
+      "dir" : "./", //workspace内的相对路径
+      "containerid" : "123456",
+  }
+  ```
+
+* return: string (contents of file)
 
 
 
@@ -68,7 +95,7 @@
 [
     {
         "projectname":"PROJECT", 
-     	"containerid':'123456", 
+     	"containeri":"123456", 
      	"language": "python", 
      	"version":"10", 
      	"time":"2022-08-06 22:32:43"
@@ -88,7 +115,7 @@
 ```json
 {
     "projectname":"PROJECT", 
-    "containerid':'123456", 
+    "containerid":"123456", 
     "language": "python", 
     "version":"10", 
     "time":"2022-08-06 22:32:43"
