@@ -128,7 +128,7 @@
   ```json
   {
       'dir':'hsu1023/new',
-      'filename': "1.py"
+      'filename': "1.py",
       'containerid':"123456"
   }
   ```
@@ -157,7 +157,7 @@
   {
       'dir':'.',
       'filename': "123.txt",
-      'newname': "234.txt"
+      'newname': "234.txt",
       'containerid':"123456"
   }
   ```
