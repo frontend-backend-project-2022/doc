@@ -3,7 +3,6 @@
 采用socketio的部分有terminal和pdb，下介绍pdb的API
 
 * 注：全部均未经过调试（08/15）
-* 注：发送事件应该分多个，待完成（08/15）
 
 
 
@@ -11,19 +10,21 @@
 
 * 发送"response"事件，并返回如下值
 
-  * bp是断点列表，bp[n]=lineno下标表示第(n+1)个断点位于第lineno行（n+1是因为断点编号从1开始而列表从0开始），注意某一行可能有多个断点。删除断点后bp对应位置的值修改为-1。
+  * bp是断点列表
   * lineno是当前运行到第lineno行
   * state=0表示debug中断，state=1表示pdb正在运行
+  * messageType为message的类型，分为console（控制台输出），variables（变量值查看）和none（无message，message默认为空字符串）
   * message是备注信息，在以下各个事件中有注明
 
 * 返回json如下：
 
   ```json
   {
-      'bp': [3,1,3,-1,5,-1], 
+      'bp': [1,3,4], 
    	'lineno': 3,
       'state': 1,
-      'message': 'xxx',
+      'messageType' : 'console', // console/variables/none
+      'message': 'xxx', // empty string for 'none'
   }
   ```
 
@@ -50,20 +51,24 @@
 跳到下一个断点
 
 * 接收“skip”事件
-* 返回message为在控制台获得的输出(str)
+* 返回message为在控制台获得的输出(str)，messageType为"console"
 
 跳到下一行
 
 * 接收“next”事件
-* 返回message为在控制台获得的输出(str)
+* 返回message为在控制台获得的输出(str)，messageType为"console"
 
 查看参数和参数类型
 
 * 接收“check”事件，需要给予variables参数
 
-  * variables是一个list，即需要查看的参数名（待修改 08/15）
+  * variables是一个json，即需要查看的参数名
 
-* 返回message如下
+    ```json
+    ['a', 'cnt', ]
+    ```
+
+* 返回message如下，messageType为"variables"
 
   ```json
   [
