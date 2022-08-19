@@ -2,18 +2,28 @@
 
 采用socketio的部分有terminal和pdb，下介绍pdb的API
 
-* 注：全部均未经过调试（08/15）
+* debugger相关的namespace均为**'/debugger'**
+* 注：全部均未经过调试（08/19）
 
 
 
-### 发送事件
+### 建立连接
+
+* 接收"start"事件，需要container_id与filepath两个参数
+
+  * container_id(str)，项目的container id
+  * filepath(str)，调试文件相对于workspace的路径
+
+  
+
+### pdb发送事件
 
 * 发送"response"事件，并返回如下值
 
   * bp是断点列表
   * lineno是当前运行到第lineno行
   * state=0表示debug中断，state=1表示pdb正在运行
-  * messageType为message的类型，分为console（控制台输出），variables（变量值查看）和none（无message，message默认为空字符串）
+  * messageType为message的类型，分为variables（变量值查看）和none（无message，message默认为空字符串）
   * message是备注信息，在以下各个事件中有注明
 
 * 返回json如下：
@@ -23,20 +33,14 @@
       'bp': [1,3,4], 
    	'lineno': 3,
       'state': 1,
-      'messageType' : 'console', // console/variables/none
+      'messageType' : 'variables', // variables/none
       'message': 'xxx', // empty string for 'none'
   }
   ```
 
 
 
-### 接收事件
-
-建立连接：
-
-* 接收"connectSignal"事件，需要container_id与filepath两个参数
-  * container_id(str)，项目的container id
-  * filepath(str)，调试文件相对于workspace的路径
+### pdb接收事件
 
 添加断点：
 
@@ -81,6 +85,21 @@
   ]
   ```
 
-强行退出
 
-* 接收“exit”事件
+
+### 控制台发送事件
+
+* 控制台发送"stdout"事件，参数为str，即程序运行结果
+
+
+
+### 控制台接收事件
+
+* 控制台发送"stdin"事件，参数为str，即程序输入
+
+
+
+### 断开连接/退出
+
+* 接收"exit"或"disconnect"事件（二者等效）
+
