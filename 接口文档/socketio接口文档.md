@@ -2,8 +2,8 @@
 
 采用socketio的部分有terminal和pdb，下介绍pdb的API
 
-* debugger相关的namespace均为**'/debugger'**
-* 注：全部均未经过调试（08/19）
+* Python相关的namespace为"/pdb"
+* C/C++相关的namespace为"/gdb"
 
 
 
@@ -21,7 +21,7 @@
 * 发送"response"事件，并返回如下值
 
   * bp是断点列表
-  * lineno是当前运行到第lineno行
+  * lineno是当前运行到某个文件第lineno行
   * state=0表示debug中断，state=1表示pdb正在运行
   * messageType为message的类型，分为variables（变量值查看）和none（无message，message默认为空字符串）
   * message是备注信息，在以下各个事件中有注明
@@ -30,8 +30,8 @@
 
   ```json
   {
-      'bp': [1,3,4], 
-   	'lineno': 3,
+      'bp': [["main.py",5],["",-1],["utils.py",10]], 
+   	'lineno': [["main.py",1]],
       'state': 1,
       'messageType' : 'variables', // variables/none
       'message': 'xxx', // empty string for 'none'
@@ -45,12 +45,12 @@
 添加断点：
 
 * 接收"add"事件，需要给予lineno参数
-  * lineno(int)，断点位于的行数
+  * lineno(int)，断点位于的文件和行数
 
 删除断点：
 
 * 接收"delete"事件，需要给予lineno参数
-  * lineno(int)，断点位于的行数
+  * lineno(int)，断点位于的文件和行数
 
 跳到下一个断点
 
@@ -72,7 +72,7 @@
     ['a', 'cnt', ]
     ```
 
-* 返回message如下，messageType为"variables"
+* 返回message如下，messageType为"variables"，如果无法显示变量类型，则返回字符串'value'
 
   ```json
   [

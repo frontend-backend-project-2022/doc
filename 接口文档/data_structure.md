@@ -57,13 +57,13 @@
   
   ---
   
-  ### 后端pdb在内存中的数据
+  ### 后端pdb(gdb)在内存中的数据
   
-  * pdb_poll是一个字典，保存request.sid到pdbData类的映射
-  * pdbData类保存bp，containerid，filepath，psocket，lineno，state (debugger.py:10-21)
-    * bp是断点列表，bp[n]=lineno下标表示第(n+1)个断点位于第lineno行（n+1是因为断点编号从1开始而列表从0开始），注意某一行可能有多个断点。删除断点后bp对应位置的值修改为-1。
+  * pdb_poll(gdb_poll)是一个字典，保存request.sid到pdbData(gdbData)类的映射
+  * pdbData(gdbData)类保存bp，containerid，filepath，psocket，lineno，state (debugger.py:10-21)
+    * bp是断点列表，每个断点形如["filepath", 1]，分别对应文件名和行数
     * filepath是该python文件相对于/workspace的路径
-    * lineno是当前运行到第lineno行
+    * lineno是当前运行到某个文件第lineno行，形如["filepath", 1]
     * state=0表示debug中断，state=1表示pdb正在运行
   * 每次socketio请求后均会emit message事件，每次message事件中均会包含bp，lineno，state和可选的message备注信息
   

@@ -1,7 +1,5 @@
 ## ide-related API
 
-注：未测试的API已备注，已测试的均可于test_api找到（08/10）
-
 上传文件
 
 * `POST /docker/uploadFile/`
@@ -20,7 +18,7 @@
 
 * return: "success"
 
-上传文件夹（未测试）
+上传文件夹
 
 * `POST /docker/uploadFolder/`
 
@@ -106,7 +104,7 @@
 
 * 注：须一个个创建，dir的basename为新创建的文件夹
 
-删除文件夹（及内容）（未测试）
+删除文件夹（及内容）
 
 * `POST /docker/deleteFolder/`
 
@@ -119,7 +117,7 @@
   }
   ```
 
-新建文件（未测试）
+新建文件
 
 * `POST /docker/createFile/`
 
@@ -133,7 +131,7 @@
   }
   ```
 
-删除文件（未测试）
+删除文件
 
 * `DELETE /docker/deleteFile/`
 
@@ -147,7 +145,7 @@
   }
   ```
 
-重命名文件（未测试）
+重命名文件
 
 * `POST /docker/renameFile/`
 
